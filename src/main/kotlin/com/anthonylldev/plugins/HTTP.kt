@@ -14,7 +14,7 @@ fun Application.configureHTTP() {
         method(HttpMethod.Patch)
         header(HttpHeaders.Authorization)
         header("MyCustomHeader")
-        anyHost() // @TODO: Don't do this in production if possible. Try to limit it.
+        allowCredentials = true
     }
     install(DefaultHeaders) {
         header("X-Engine", "Ktor") // will send this header with each response
