@@ -4,6 +4,10 @@ import com.anthonylldev.authentication.application.service.AuthService
 import com.anthonylldev.authentication.application.service.impl.AuthServiceImpl
 import com.anthonylldev.authentication.domain.AuthRepository
 import com.anthonylldev.authentication.infrastructure.repository.AuthRepositoryImpl
+import com.anthonylldev.user.application.service.UserService
+import com.anthonylldev.user.application.service.impl.UserServiceImpl
+import com.anthonylldev.user.domain.UserRepository
+import com.anthonylldev.user.infrastructure.repository.UserRepositoryImpl
 import com.anthonylldev.util.Constants
 import io.ktor.application.*
 import org.koin.dsl.module
@@ -23,6 +27,10 @@ fun Application.configureKoin() {
             single<AuthRepository> { AuthRepositoryImpl(get()) }
 
             single<AuthService> { AuthServiceImpl(get()) }
+
+            single<UserRepository> { UserRepositoryImpl(get()) }
+
+            single<UserService> { UserServiceImpl(get()) }
 
         })
     }

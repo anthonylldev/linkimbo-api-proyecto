@@ -1,6 +1,6 @@
 package com.anthonylldev.authentication.domain
 
-import com.anthonylldev.authentication.application.User
+import com.anthonylldev.user.domain.User
 
 interface AuthRepository {
 

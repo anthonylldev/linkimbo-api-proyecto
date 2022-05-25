@@ -3,7 +3,7 @@ package com.anthonylldev.authentication.infrastructure.rest
 import com.anthonylldev.authentication.application.Token
 import com.anthonylldev.authentication.application.service.AuthService
 import com.anthonylldev.authentication.domain.Auth
-import com.anthonylldev.authentication.application.User
+import com.anthonylldev.user.domain.User
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import io.ktor.application.*

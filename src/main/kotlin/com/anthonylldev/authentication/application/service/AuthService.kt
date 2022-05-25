@@ -1,6 +1,6 @@
 package com.anthonylldev.authentication.application.service
 
-import com.anthonylldev.authentication.application.User
+import com.anthonylldev.user.domain.User
 
 interface AuthService {
 

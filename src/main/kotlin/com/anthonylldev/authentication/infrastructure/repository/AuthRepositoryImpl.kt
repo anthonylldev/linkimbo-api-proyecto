@@ -1,7 +1,7 @@
 package com.anthonylldev.authentication.infrastructure.repository
 
 import com.anthonylldev.authentication.domain.AuthRepository
-import com.anthonylldev.authentication.application.User
+import com.anthonylldev.user.domain.User
 import org.litote.kmongo.coroutine.CoroutineDatabase
 import org.litote.kmongo.eq
 
