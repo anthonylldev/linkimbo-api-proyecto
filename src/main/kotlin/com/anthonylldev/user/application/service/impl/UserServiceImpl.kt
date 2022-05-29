@@ -1,12 +1,14 @@
 package com.anthonylldev.user.application.service.impl
 
+import com.anthonylldev.follow.domain.FollowRepository
 import com.anthonylldev.user.application.ProfileResponse
 import com.anthonylldev.user.application.service.UserService
 import com.anthonylldev.user.domain.User
 import com.anthonylldev.user.domain.UserRepository
 
 class UserServiceImpl(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val followRepository: FollowRepository
 ) : UserService {
 
     override suspend fun loadProfile(userId: String, callerUserId: String): ProfileResponse? {
@@ -23,7 +25,7 @@ class UserServiceImpl(
             followingCount = user.followingCount,
             postCount = user.postCount,
             isOwnProfile = userId == callerUserId,
-            isFollowing = true /* TODO(get from follow repository) */
+            isFollowing = followRepository.isFollowing(callerUserId, userId)
         )
     }
 
