@@ -2,12 +2,14 @@ package com.anthonylldev.authentication.infrastructure.rest
 
 import com.anthonylldev.authentication.application.Token
 import com.anthonylldev.authentication.application.service.AuthService
-import com.anthonylldev.authentication.domain.Auth
+import com.anthonylldev.authentication.domain.CreateAccount
+import com.anthonylldev.authentication.domain.Login
 import com.anthonylldev.user.domain.User
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import io.ktor.application.*
 import io.ktor.auth.*
+import io.ktor.client.response.*
 import io.ktor.http.*
 import io.ktor.request.*
 import io.ktor.response.*
@@ -35,13 +37,12 @@ fun Route.authenticationController(
     }
 
     post("/login") {
-
-        val request = call.receiveOrNull<Auth>() ?: kotlin.run {
+        val request = call.receiveOrNull<Login>() ?: kotlin.run {
             call.respond(HttpStatusCode.BadRequest)
             return@post
         }
 
-        val user: User? = authService.login(request.username, request.password)
+        val user: User? = authService.login(request)
 
         if (user == null) {
             call.respond(HttpStatusCode.Unauthorized)
@@ -50,6 +51,22 @@ fun Route.authenticationController(
 
         call.respond(HttpStatusCode.OK, generateToken(user.id))
         return@post
+    }
+
+    post("/createAccount") {
+        val request = call.receiveOrNull<CreateAccount>() ?: kotlin.run {
+            call.respond(HttpStatusCode.BadRequest)
+            return@post
+        }
+
+        val user: User? = authService.createAccount(request)
+
+        if (user == null) {
+            call.respond(HttpStatusCode.BadRequest)
+            return@post
+        }
+
+        call.respond(HttpStatusCode.OK, generateToken(user.id))
     }
 
     authenticate {

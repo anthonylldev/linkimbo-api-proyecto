@@ -1,6 +1,6 @@
 package com.anthonylldev.authentication.domain
 
-data class Auth(
+data class Login(
     val username: String,
     val password: String
 )
