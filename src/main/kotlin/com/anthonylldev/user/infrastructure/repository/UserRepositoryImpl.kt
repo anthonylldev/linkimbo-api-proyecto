@@ -13,7 +13,7 @@ class UserRepositoryImpl(
     private val user = db.getCollection<User>()
 
     override suspend fun getUserById(userId: String): User? {
-        return this.user.findOneById(ObjectId(userId))
+        return this.user.findOneById(userId)
     }
 
     override suspend fun incrementFollow(userId: String, followedUserId: String) {
@@ -31,7 +31,7 @@ class UserRepositoryImpl(
     override suspend fun reduceFollow(userId: String, followedUserId: String) {
         user.updateOneById(
             ObjectId(userId),
-            inc(User::followingCount,-1)
+            inc(User::followingCount, -1)
         )
 
         user.updateOneById(

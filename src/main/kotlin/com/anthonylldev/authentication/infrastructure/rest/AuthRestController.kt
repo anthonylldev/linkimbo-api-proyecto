@@ -33,7 +33,7 @@ fun Route.authenticationController(
             .withAudience(jwtAudience)
             .sign(Algorithm.HMAC256(jwtSecret))
 
-        return Token(token)
+        return Token(userId, token)
     }
 
     post("/login") {
