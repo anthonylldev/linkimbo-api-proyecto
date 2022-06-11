@@ -5,6 +5,7 @@ import com.anthonylldev.user.domain.UserRepository
 import org.bson.types.ObjectId
 import org.litote.kmongo.coroutine.CoroutineDatabase
 import org.litote.kmongo.inc
+import org.litote.kmongo.util.idValue
 
 class UserRepositoryImpl(
     db: CoroutineDatabase
@@ -14,6 +15,26 @@ class UserRepositoryImpl(
 
     override suspend fun getUserById(userId: String): User? {
         return this.user.findOneById(userId)
+    }
+
+    override suspend fun updateUser(request: User, userId: String): Boolean {
+        return this.user.updateOneById(
+            id = userId,
+            update = User(
+                id = userId,
+                username = request.username,
+                email = request.email,
+                password = request.password,
+                realName = request.realName,
+                profilePictureUrl = request.profilePictureUrl,
+                description = request.description,
+                website = request.website,
+                followerCount = request.followerCount,
+                followingCount = request.followingCount,
+                postCount = request.postCount,
+            )
+
+        ).modifiedCount > 0
     }
 
     override suspend fun incrementFollow(userId: String, followedUserId: String) {

@@ -29,4 +29,14 @@ class UserServiceImpl(
         )
     }
 
+    override suspend fun updateUser(request: User, userId: String): User? {
+        val user: User = this.userRepository.getUserById(userId) ?: return null
+        this.userRepository.updateUser(request, userId)
+
+        return this.userRepository.getUserById(userId)
+    }
+
+    override suspend fun getUser(userId: String): User? {
+        return this.userRepository.getUserById(userId)
+    }
 }
