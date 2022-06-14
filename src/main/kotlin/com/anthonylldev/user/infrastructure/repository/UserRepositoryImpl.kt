@@ -26,7 +26,7 @@ class UserRepositoryImpl(
                 email = request.email,
                 password = request.password,
                 realName = request.realName,
-                profilePictureUrl = request.profilePictureUrl,
+                imageBase64 = request.imageBase64,
                 description = request.description,
                 website = request.website,
                 followerCount = request.followerCount,

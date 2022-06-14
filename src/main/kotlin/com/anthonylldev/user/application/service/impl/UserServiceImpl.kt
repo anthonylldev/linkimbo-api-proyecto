@@ -18,7 +18,7 @@ class UserServiceImpl(
             userId = user.id,
             username = user.username,
             realName = user.realName,
-            profilePictureUrl = user.profilePictureUrl,
+            imageBase64 = user.imageBase64,
             description = user.description,
             website = user.website,
             followerCount = user.followerCount,
