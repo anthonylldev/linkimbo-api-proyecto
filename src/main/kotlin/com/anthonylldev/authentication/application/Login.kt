@@ -1,4 +1,4 @@
-package com.anthonylldev.authentication.domain
+package com.anthonylldev.authentication.application
 
 data class Login(
     val username: String,

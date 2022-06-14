@@ -8,6 +8,10 @@ import com.anthonylldev.follow.application.service.FollowService
 import com.anthonylldev.follow.application.service.impl.FollowServiceImpl
 import com.anthonylldev.follow.domain.FollowRepository
 import com.anthonylldev.follow.infrastructure.repository.FollowRepositoryImpl
+import com.anthonylldev.post.application.service.PostService
+import com.anthonylldev.post.application.service.impl.PostServiceImpl
+import com.anthonylldev.post.domain.PostRepository
+import com.anthonylldev.post.infrastructure.repository.PostRepositoryImpl
 import com.anthonylldev.user.application.service.UserService
 import com.anthonylldev.user.application.service.impl.UserServiceImpl
 import com.anthonylldev.user.domain.UserRepository
@@ -41,6 +45,9 @@ fun Application.configureKoin() {
 
             single<FollowService> { FollowServiceImpl(get(), get()) }
 
+            single<PostRepository> { PostRepositoryImpl(get()) }
+
+            single<PostService> { PostServiceImpl(get(), get()) }
         })
     }
 }

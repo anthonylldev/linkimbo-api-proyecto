@@ -1,6 +1,6 @@
 package com.anthonylldev.follow.infrastructure.repository
 
-import com.anthonylldev.follow.application.Follow
+import com.anthonylldev.follow.domain.Follow
 import com.anthonylldev.follow.domain.FollowRepository
 import org.litote.kmongo.and
 import org.litote.kmongo.coroutine.CoroutineDatabase

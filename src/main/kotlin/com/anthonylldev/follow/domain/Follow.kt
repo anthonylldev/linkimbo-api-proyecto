@@ -1,4 +1,4 @@
-package com.anthonylldev.follow.application
+package com.anthonylldev.follow.domain
 
 import org.bson.codecs.pojo.annotations.BsonId
 import org.bson.types.ObjectId

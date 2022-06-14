@@ -1,6 +1,5 @@
 package com.anthonylldev.user.infrastructure.rest
 
-import com.anthonylldev.authentication.domain.Login
 import com.anthonylldev.user.application.ProfileResponse
 import com.anthonylldev.user.application.service.UserService
 import com.anthonylldev.user.domain.User
@@ -38,8 +37,13 @@ fun Route.userController(
             }
         }
 
-        get("/user") {
-            val user: User? = userService.getUser(call.userId)
+        get("/user/{userId}") {
+            val userIdByRequest: String = call.parameters["userId"] ?: kotlin.run {
+                call.respond(HttpStatusCode.BadRequest)
+                return@get
+            }
+
+            val user: User? = userService.getUser(userIdByRequest)
 
             if (user != null) {
                 call.respond(
@@ -53,13 +57,23 @@ fun Route.userController(
             }
         }
 
-        put("/user") {
+        put("/user/{userId}") {
             val request = call.receiveOrNull<User>() ?: kotlin.run {
                 call.respond(HttpStatusCode.BadRequest)
                 return@put
             }
 
-            val profileUpdate: User? = userService.updateUser(request, call.userId)
+            val userIdByRequest: String = call.parameters["userId"] ?: kotlin.run {
+                call.respond(HttpStatusCode.BadRequest)
+                return@put
+            }
+
+            if (userIdByRequest != call.userId) {
+                call.respond(HttpStatusCode.Unauthorized)
+                return@put
+            }
+
+            val profileUpdate: User? = userService.updateUser(request, userIdByRequest)
 
             if (profileUpdate == null) {
                 call.respond(
