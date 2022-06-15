@@ -18,4 +18,8 @@ class PostRepositoryImpl(
     override suspend fun findAll(): List<Post> {
         return this.post.find().descendingSort(Post::timestamp).toList()
     }
+
+    override suspend fun getOneById(postId: String): Post? {
+        return this.post.findOneById(postId)
+    }
 }

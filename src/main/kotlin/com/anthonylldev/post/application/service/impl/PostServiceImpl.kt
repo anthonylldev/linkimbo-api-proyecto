@@ -16,13 +16,12 @@ class PostServiceImpl(
 
         this.postRepository.insertOne(
             Post(
-            id = postDto.id,
-            userId = postDto.user.id,
-            imageBase64 = postDto.imageBase64,
-            description = postDto.description,
-            likeCount = postDto.likeCount,
-            timestamp = postDto.timestamp
-        )
+                userId = postDto.user.id,
+                imageBase64 = postDto.imageBase64,
+                description = postDto.description,
+                likeCount = postDto.likeCount,
+                timestamp = postDto.timestamp
+            )
         )
 
         return true
@@ -33,18 +32,39 @@ class PostServiceImpl(
 
         this.postRepository.findAll().forEach { request ->
             this.userRepository.getUserById(request.userId)?.let { user ->
-                post.add(PostDto(
-                    id = request.id,
-                    user = user,
-                    imageBase64 = request.imageBase64,
-                    description = request.description,
-                    likeCount = request.likeCount,
-                    commentCount = request.commentCount,
-                    timestamp = request.timestamp
-                ))
+                post.add(
+                    PostDto(
+                        id = request.id,
+                        user = user,
+                        imageBase64 = request.imageBase64,
+                        description = request.description,
+                        likeCount = request.likeCount,
+                        commentCount = request.commentCount,
+                        timestamp = request.timestamp
+                    )
+                )
             }
         }
 
         return post
+    }
+
+    override suspend fun getPost(postId: String): PostDto? {
+
+        this.postRepository.getOneById(postId)?.let { post ->
+            this.userRepository.getUserById(post.userId)?.let { user ->
+                return PostDto(
+                    id = post.id,
+                    user = user,
+                    imageBase64 = post.imageBase64,
+                    description = post.description,
+                    likeCount = post.likeCount,
+                    commentCount = post.commentCount,
+                    timestamp = post.timestamp
+                )
+            }
+            return null
+        }
+        return null
     }
 }

@@ -50,5 +50,23 @@ fun Route.postController(
             }*/
         }
 
+        get("/post/{postId}") {
+            val postIdByRequest: String = call.parameters["postId"] ?: kotlin.run {
+                call.respond(HttpStatusCode.BadRequest)
+                return@get
+            }
+
+            val post: PostDto? = postService.getPost(postIdByRequest)
+
+            if (post != null) {
+                call.respond(
+                    HttpStatusCode.OK,
+                    post
+                )
+            } else {
+                call.respond(
+                    HttpStatusCode.NotFound
+                )
+            }        }
     }
 }

@@ -9,10 +9,10 @@ import io.ktor.request.*
 
 fun Application.configureSockets() {
     install(WebSockets) {
-        /*pingPeriod = Duration.ofSeconds(15)
+        pingPeriod = Duration.ofSeconds(15)
         timeout = Duration.ofSeconds(15)
         maxFrameSize = Long.MAX_VALUE
-        masking = false*/
+        masking = false
     }
 
 }
