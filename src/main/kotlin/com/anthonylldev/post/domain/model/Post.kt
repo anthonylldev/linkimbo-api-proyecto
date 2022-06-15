@@ -1,4 +1,4 @@
-package com.anthonylldev.post.domain
+package com.anthonylldev.post.domain.model
 
 import org.bson.codecs.pojo.annotations.BsonId
 import org.bson.types.ObjectId

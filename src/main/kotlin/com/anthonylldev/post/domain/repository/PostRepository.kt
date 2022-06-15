@@ -1,4 +1,6 @@
-package com.anthonylldev.post.domain
+package com.anthonylldev.post.domain.repository
+
+import com.anthonylldev.post.domain.model.Post
 
 interface PostRepository {
 

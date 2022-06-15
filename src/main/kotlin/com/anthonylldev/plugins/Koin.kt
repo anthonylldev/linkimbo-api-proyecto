@@ -10,7 +10,7 @@ import com.anthonylldev.follow.domain.FollowRepository
 import com.anthonylldev.follow.infrastructure.repository.FollowRepositoryImpl
 import com.anthonylldev.post.application.service.PostService
 import com.anthonylldev.post.application.service.impl.PostServiceImpl
-import com.anthonylldev.post.domain.PostRepository
+import com.anthonylldev.post.domain.repository.PostRepository
 import com.anthonylldev.post.infrastructure.repository.PostRepositoryImpl
 import com.anthonylldev.user.application.service.UserService
 import com.anthonylldev.user.application.service.impl.UserServiceImpl
@@ -20,13 +20,19 @@ import com.anthonylldev.util.Constants
 import io.ktor.application.*
 import org.koin.dsl.module
 import org.koin.ktor.ext.Koin
-import org.koin.ktor.ext.get
 import org.litote.kmongo.coroutine.coroutine
 import org.litote.kmongo.reactivestreams.KMongo
+import ch.qos.logback.classic.Level
+import ch.qos.logback.classic.LoggerContext
+import org.slf4j.LoggerFactory
 
 fun Application.configureKoin() {
     install(Koin) {
         modules(module {
+
+            val loggerContext = LoggerFactory.getILoggerFactory() as LoggerContext
+            val rootLogger = loggerContext.getLogger( "org.mongodb.driver" )
+            rootLogger.level = Level.OFF
 
             single {
                 val client = KMongo.createClient().coroutine

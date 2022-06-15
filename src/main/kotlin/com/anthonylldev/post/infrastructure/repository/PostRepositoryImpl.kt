@@ -1,7 +1,7 @@
 package com.anthonylldev.post.infrastructure.repository
 
-import com.anthonylldev.post.domain.Post
-import com.anthonylldev.post.domain.PostRepository
+import com.anthonylldev.post.domain.model.Post
+import com.anthonylldev.post.domain.repository.PostRepository
 import org.litote.kmongo.coroutine.CoroutineDatabase
 import org.litote.kmongo.util.idValue
 
