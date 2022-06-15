@@ -1,6 +1,7 @@
 package com.anthonylldev.post.infrastructure.rest
 
-import com.anthonylldev.post.application.dto.PostDto
+import com.anthonylldev.post.application.data.PostRequest
+import com.anthonylldev.post.application.data.PostResponse
 import com.anthonylldev.post.application.service.PostService
 import com.anthonylldev.util.userId
 import io.ktor.application.*
@@ -17,12 +18,12 @@ fun Route.postController(
     authenticate {
 
         post("/post") {
-            val request = call.receiveOrNull<PostDto>() ?: kotlin.run {
+            val request = call.receiveOrNull<PostRequest>() ?: kotlin.run {
                 call.respond(HttpStatusCode.BadRequest, it)
                 return@post
             }
 
-            if (request.user.id != call.userId) {
+            if (request.userId != call.userId) {
                 call.respond(HttpStatusCode.BadRequest)
                 return@post
             }
@@ -56,7 +57,7 @@ fun Route.postController(
                 return@get
             }
 
-            val post: PostDto? = postService.getPost(postIdByRequest)
+            val post: PostResponse? = postService.getPost(postIdByRequest)
 
             if (post != null) {
                 call.respond(

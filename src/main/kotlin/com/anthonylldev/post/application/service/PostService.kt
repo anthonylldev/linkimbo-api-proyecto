@@ -1,11 +1,12 @@
 package com.anthonylldev.post.application.service
 
-import com.anthonylldev.post.application.dto.PostDto
+import com.anthonylldev.post.application.data.PostRequest
+import com.anthonylldev.post.application.data.PostResponse
 
 interface PostService {
 
-    suspend fun createPostIfUserExist(postDto: PostDto): Boolean
-    suspend fun getAllPostSortByDate(): List<PostDto>
-    suspend fun getPost(postId: String): PostDto?
+    suspend fun createPostIfUserExist(postRequest: PostRequest): Boolean
+    suspend fun getAllPostSortByDate(): List<PostResponse>
+    suspend fun getPost(postId: String): PostResponse?
 
 }
