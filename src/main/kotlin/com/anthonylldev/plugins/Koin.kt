@@ -24,6 +24,10 @@ import org.litote.kmongo.coroutine.coroutine
 import org.litote.kmongo.reactivestreams.KMongo
 import ch.qos.logback.classic.Level
 import ch.qos.logback.classic.LoggerContext
+import com.anthonylldev.like.application.service.PostLikeService
+import com.anthonylldev.like.application.service.impl.PostLikeServiceImpl
+import com.anthonylldev.like.domain.repository.PostLikeRepository
+import com.anthonylldev.like.infrastructure.repository.PostLikeRepositoryImpl
 import org.slf4j.LoggerFactory
 
 fun Application.configureKoin() {
@@ -31,7 +35,7 @@ fun Application.configureKoin() {
         modules(module {
 
             val loggerContext = LoggerFactory.getILoggerFactory() as LoggerContext
-            val rootLogger = loggerContext.getLogger( "org.mongodb.driver" )
+            val rootLogger = loggerContext.getLogger("org.mongodb.driver")
             rootLogger.level = Level.OFF
 
             single {
@@ -40,20 +44,17 @@ fun Application.configureKoin() {
             }
 
             single<AuthRepository> { AuthRepositoryImpl(get()) }
-
-            single<AuthService> { AuthServiceImpl(get()) }
-
             single<UserRepository> { UserRepositoryImpl(get()) }
-
-            single<UserService> { UserServiceImpl(get(), get()) }
-
             single<FollowRepository> { FollowRepositoryImpl(get()) }
-
-            single<FollowService> { FollowServiceImpl(get(), get()) }
-
+            single<PostLikeRepository> { PostLikeRepositoryImpl(get()) }
             single<PostRepository> { PostRepositoryImpl(get()) }
 
-            single<PostService> { PostServiceImpl(get(), get()) }
+            single<AuthService> { AuthServiceImpl(get()) }
+            single<UserService> { UserServiceImpl(get(), get()) }
+            single<FollowService> { FollowServiceImpl(get(), get()) }
+            single<PostLikeService> { PostLikeServiceImpl(get(), get()) }
+            single<PostService> { PostServiceImpl(get(), get(), get()) }
+
         })
     }
 }

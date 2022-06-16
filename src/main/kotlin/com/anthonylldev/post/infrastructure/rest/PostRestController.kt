@@ -39,7 +39,7 @@ fun Route.postController(
 
         get("/post") {
 
-            val allPostSortByDate = postService.getAllPostSortByDate()
+            val allPostSortByDate = postService.getAllPostSortByDate(call.userId)
             call.respond(HttpStatusCode.OK, allPostSortByDate)
 
             /*if (allPostSortByDate.isEmpty()) {
@@ -57,7 +57,7 @@ fun Route.postController(
                 return@get
             }
 
-            val post: PostResponse? = postService.getPost(postIdByRequest)
+            val post: PostResponse? = postService.getPost(call.userId, postIdByRequest)
 
             if (post != null) {
                 call.respond(
@@ -68,6 +68,7 @@ fun Route.postController(
                 call.respond(
                     HttpStatusCode.NotFound
                 )
-            }        }
+            }
+        }
     }
 }

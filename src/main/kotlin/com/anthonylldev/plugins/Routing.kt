@@ -4,6 +4,8 @@ import com.anthonylldev.authentication.application.service.AuthService
 import com.anthonylldev.authentication.infrastructure.rest.authenticationController
 import com.anthonylldev.follow.application.service.FollowService
 import com.anthonylldev.follow.infrastructure.rest.followController
+import com.anthonylldev.like.application.service.PostLikeService
+import com.anthonylldev.like.infrastructure.rest.likeRestController
 import com.anthonylldev.post.application.service.PostService
 import com.anthonylldev.post.infrastructure.rest.postController
 import com.anthonylldev.user.application.service.UserService
@@ -19,6 +21,7 @@ fun Application.configureRouting() {
     val userService: UserService by inject()
     val followService: FollowService by inject()
     val postService: PostService by inject()
+    val postLikeService: PostLikeService by inject()
 
     val jwtIssuer = environment.config.property("jwt.domain").getString()
     val jwtAudience = environment.config.property("jwt.audience").getString()
@@ -34,8 +37,9 @@ fun Application.configureRouting() {
         )
 
 
-            userController(userService = userService)
-            followController(followService = followService)
-            postController(postService = postService)
+        userController(userService = userService)
+        followController(followService = followService)
+        postController(postService = postService)
+        likeRestController(postLikeService = postLikeService)
     }
 }
