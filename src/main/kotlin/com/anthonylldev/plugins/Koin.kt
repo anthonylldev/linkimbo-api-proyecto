@@ -24,6 +24,10 @@ import org.litote.kmongo.coroutine.coroutine
 import org.litote.kmongo.reactivestreams.KMongo
 import ch.qos.logback.classic.Level
 import ch.qos.logback.classic.LoggerContext
+import com.anthonylldev.comment.application.service.PostCommentService
+import com.anthonylldev.comment.application.service.impl.PostCommentServiceImpl
+import com.anthonylldev.comment.domain.repository.PostCommentRepository
+import com.anthonylldev.comment.infrastructure.repository.PostCommentRepositoryImpl
 import com.anthonylldev.like.application.service.PostLikeService
 import com.anthonylldev.like.application.service.impl.PostLikeServiceImpl
 import com.anthonylldev.like.domain.repository.PostLikeRepository
@@ -47,12 +51,14 @@ fun Application.configureKoin() {
             single<UserRepository> { UserRepositoryImpl(get()) }
             single<FollowRepository> { FollowRepositoryImpl(get()) }
             single<PostLikeRepository> { PostLikeRepositoryImpl(get()) }
+            single<PostCommentRepository> { PostCommentRepositoryImpl(get()) }
             single<PostRepository> { PostRepositoryImpl(get()) }
 
             single<AuthService> { AuthServiceImpl(get()) }
             single<UserService> { UserServiceImpl(get(), get()) }
             single<FollowService> { FollowServiceImpl(get(), get()) }
             single<PostLikeService> { PostLikeServiceImpl(get(), get()) }
+            single<PostCommentService> { PostCommentServiceImpl(get()) }
             single<PostService> { PostServiceImpl(get(), get(), get()) }
 
         })

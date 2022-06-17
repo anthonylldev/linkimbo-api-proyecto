@@ -8,5 +8,6 @@ interface PostRepository {
     suspend fun findAll(): List<Post>
     suspend fun getOneById(postId: String): Post?
     suspend fun updateLikeCount(postId: String, i: Int)
+    suspend fun updateCommentCount(postId: String, i: Int)
 
 }
