@@ -1,4 +1,4 @@
-package com.anthonylldev.like.application.service
+package com.anthonylldev.like.application.service.post
 
 interface PostLikeService {
     suspend fun like(userId: String, postId: String): Boolean

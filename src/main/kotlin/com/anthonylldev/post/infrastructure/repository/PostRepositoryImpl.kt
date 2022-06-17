@@ -19,6 +19,13 @@ class PostRepositoryImpl(
         return this.post.insertOne(post).idValue != null
     }
 
+    override suspend fun updateCommentCount(postId: String, i: Int) {
+        post.updateOneById(
+            postId,
+            inc(Post::commentCount, i)
+        )
+    }
+
     override suspend fun findAll(): List<Post> {
         return this.post.find().descendingSort(Post::timestamp).toList()
     }

@@ -1,7 +1,7 @@
-package com.anthonylldev.like.application.service.impl
+package com.anthonylldev.like.application.service.post.impl
 
-import com.anthonylldev.like.application.service.PostLikeService
-import com.anthonylldev.like.domain.repository.PostLikeRepository
+import com.anthonylldev.like.application.service.post.PostLikeService
+import com.anthonylldev.like.domain.post.repository.PostLikeRepository
 import com.anthonylldev.post.domain.repository.PostRepository
 
 class PostLikeServiceImpl(

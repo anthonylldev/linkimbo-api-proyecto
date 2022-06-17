@@ -24,10 +24,18 @@ import org.litote.kmongo.coroutine.coroutine
 import org.litote.kmongo.reactivestreams.KMongo
 import ch.qos.logback.classic.Level
 import ch.qos.logback.classic.LoggerContext
-import com.anthonylldev.like.application.service.PostLikeService
-import com.anthonylldev.like.application.service.impl.PostLikeServiceImpl
-import com.anthonylldev.like.domain.repository.PostLikeRepository
-import com.anthonylldev.like.infrastructure.repository.PostLikeRepositoryImpl
+import com.anthonylldev.comment.application.service.PostCommentService
+import com.anthonylldev.comment.application.service.impl.PostCommentServiceImpl
+import com.anthonylldev.comment.domain.repository.PostCommentRepository
+import com.anthonylldev.comment.infrastructure.repository.PostCommentRepositoryImpl
+import com.anthonylldev.like.application.service.comment.CommentLikeService
+import com.anthonylldev.like.application.service.comment.impl.CommentLikeServiceImpl
+import com.anthonylldev.like.application.service.post.PostLikeService
+import com.anthonylldev.like.application.service.post.impl.PostLikeServiceImpl
+import com.anthonylldev.like.domain.comment.repository.CommentLikeRepository
+import com.anthonylldev.like.domain.post.repository.PostLikeRepository
+import com.anthonylldev.like.infrastructure.repository.comment.CommentLikeRepositoryImpl
+import com.anthonylldev.like.infrastructure.repository.post.PostLikeRepositoryImpl
 import org.slf4j.LoggerFactory
 
 fun Application.configureKoin() {
@@ -47,12 +55,16 @@ fun Application.configureKoin() {
             single<UserRepository> { UserRepositoryImpl(get()) }
             single<FollowRepository> { FollowRepositoryImpl(get()) }
             single<PostLikeRepository> { PostLikeRepositoryImpl(get()) }
+            single<PostCommentRepository> { PostCommentRepositoryImpl(get()) }
+            single<CommentLikeRepository> { CommentLikeRepositoryImpl(get()) }
             single<PostRepository> { PostRepositoryImpl(get()) }
 
             single<AuthService> { AuthServiceImpl(get()) }
             single<UserService> { UserServiceImpl(get(), get()) }
             single<FollowService> { FollowServiceImpl(get(), get()) }
             single<PostLikeService> { PostLikeServiceImpl(get(), get()) }
+            single<PostCommentService> { PostCommentServiceImpl(get(), get(), get(), get()) }
+            single<CommentLikeService> { CommentLikeServiceImpl(get(), get()) }
             single<PostService> { PostServiceImpl(get(), get(), get()) }
 
         })
