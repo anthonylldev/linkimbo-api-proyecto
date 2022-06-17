@@ -38,5 +38,20 @@ fun Route.commentRestController(
                 return@post
             }
         }
+
+        get("/post/{postId}/comment") {
+            val postIdByRequest: String = call.parameters["postId"] ?: kotlin.run {
+                call.respond(HttpStatusCode.BadRequest)
+                return@get
+            }
+
+            val allCommentsByPost = postCommentService.getAllPostCommentsByPost(postIdByRequest)
+
+            if (allCommentsByPost == null) {
+                call.respond(HttpStatusCode.NotFound)
+            } else {
+                call.respond(HttpStatusCode.OK, allCommentsByPost)
+            }
+        }
     }
 }
