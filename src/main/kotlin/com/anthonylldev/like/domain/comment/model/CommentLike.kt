@@ -1,14 +1,12 @@
-package com.anthonylldev.comment.domain.model
+package com.anthonylldev.like.domain.comment.model
 
 import org.bson.codecs.pojo.annotations.BsonId
 import org.bson.types.ObjectId
 
-data class PostComment(
+data class CommentLike(
     @BsonId
     val id: String = ObjectId.get().toString(),
     val userId: String,
     val postId: String,
-    val timestamp: Long,
-    val comment: String,
-    val likeCount: Int = 0,
+    val commentId: String
 )

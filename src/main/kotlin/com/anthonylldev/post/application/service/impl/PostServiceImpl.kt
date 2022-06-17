@@ -1,6 +1,6 @@
 package com.anthonylldev.post.application.service.impl
 
-import com.anthonylldev.like.domain.repository.PostLikeRepository
+import com.anthonylldev.like.domain.post.repository.PostLikeRepository
 import com.anthonylldev.post.application.data.PostRequest
 import com.anthonylldev.post.application.data.PostResponse
 import com.anthonylldev.post.application.service.PostService

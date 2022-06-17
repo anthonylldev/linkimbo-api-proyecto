@@ -2,7 +2,6 @@ package com.anthonylldev.comment.infrastructure.rest
 
 import com.anthonylldev.comment.application.data.PostCommentRequest
 import com.anthonylldev.comment.application.service.PostCommentService
-import com.anthonylldev.like.application.data.PostLikeRequest
 import com.anthonylldev.util.userId
 import io.ktor.application.*
 import io.ktor.auth.*
@@ -28,7 +27,7 @@ fun Route.commentRestController(
                 return@post
             }
 
-            val result = postCommentService.comment(call.userId, postIdByRequest, request.comment)
+            val result = postCommentService.comment(call.userId, postIdByRequest, request)
 
             if (result) {
                 call.respond(HttpStatusCode.OK)

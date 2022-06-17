@@ -1,4 +1,4 @@
-package com.anthonylldev.like.domain.repository
+package com.anthonylldev.like.domain.post.repository
 
 interface PostLikeRepository {
     suspend fun existRelationship(userId: String, postId: String): Boolean

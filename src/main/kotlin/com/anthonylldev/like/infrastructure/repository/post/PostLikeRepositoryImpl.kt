@@ -1,7 +1,7 @@
-package com.anthonylldev.like.infrastructure.repository
+package com.anthonylldev.like.infrastructure.repository.post
 
-import com.anthonylldev.like.domain.model.PostLike
-import com.anthonylldev.like.domain.repository.PostLikeRepository
+import com.anthonylldev.like.domain.post.model.PostLike
+import com.anthonylldev.like.domain.post.repository.PostLikeRepository
 import org.litote.kmongo.coroutine.CoroutineDatabase
 import org.litote.kmongo.eq
 

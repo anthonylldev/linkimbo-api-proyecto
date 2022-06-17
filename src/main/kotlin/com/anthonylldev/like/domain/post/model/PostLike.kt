@@ -1,4 +1,4 @@
-package com.anthonylldev.like.domain.model
+package com.anthonylldev.like.domain.post.model
 
 import org.bson.codecs.pojo.annotations.BsonId
 import org.bson.types.ObjectId
