@@ -2,7 +2,6 @@ package com.anthonylldev.like.application.service.impl
 
 import com.anthonylldev.like.application.service.PostLikeService
 import com.anthonylldev.like.domain.repository.PostLikeRepository
-import com.anthonylldev.post.application.service.PostService
 import com.anthonylldev.post.domain.repository.PostRepository
 
 class PostLikeServiceImpl(

@@ -1,23 +1,21 @@
 package com.anthonylldev.post.application.service.impl
 
-import com.anthonylldev.like.application.service.PostLikeService
 import com.anthonylldev.like.domain.repository.PostLikeRepository
 import com.anthonylldev.post.application.data.PostRequest
 import com.anthonylldev.post.application.data.PostResponse
 import com.anthonylldev.post.application.service.PostService
 import com.anthonylldev.post.domain.model.Post
 import com.anthonylldev.post.domain.repository.PostRepository
-import com.anthonylldev.user.application.service.UserService
 import com.anthonylldev.user.domain.UserRepository
 
 class PostServiceImpl(
     private val postRepository: PostRepository,
-    private val userService: UserService,
-    private val postLikeService: PostLikeService
+    private val userRepository: UserRepository,
+    private val postLikeRepository: PostLikeRepository
 ) : PostService {
 
     override suspend fun createPostIfUserExist(postRequest: PostRequest): Boolean {
-        this.userService.getUser(postRequest.userId) ?: return false
+        this.userRepository.getUserById(postRequest.userId) ?: return false
 
         this.postRepository.insertOne(
             Post(
@@ -35,7 +33,7 @@ class PostServiceImpl(
         val post: MutableList<PostResponse> = mutableListOf()
 
         this.postRepository.findAll().forEach { request ->
-            this.userService.getUser(request.userId)?.let { user ->
+            this.userRepository.getUserById(request.userId)?.let { user ->
                 post.add(
                     PostResponse(
                         id = request.id,
@@ -43,7 +41,7 @@ class PostServiceImpl(
                         imageBase64 = request.imageBase64,
                         description = request.description,
                         likeCount = request.likeCount,
-                        isLiked = postLikeService.isLiked(currentUserId, request.id),
+                        isLiked = postLikeRepository.existRelationship(currentUserId, request.id),
                         commentCount = request.commentCount,
                         timestamp = request.timestamp
                     )
@@ -57,14 +55,14 @@ class PostServiceImpl(
     override suspend fun getPost(currentUserId: String, postId: String): PostResponse? {
 
         this.postRepository.getOneById(postId)?.let { post ->
-            this.userService.getUser(post.userId)?.let { user ->
+            this.userRepository.getUserById(post.userId)?.let { user ->
                 return PostResponse(
                     id = post.id,
                     user = user,
                     imageBase64 = post.imageBase64,
                     description = post.description,
                     likeCount = post.likeCount,
-                    isLiked = postLikeService.isLiked(currentUserId, post.id),
+                    isLiked = postLikeRepository.existRelationship(currentUserId, post.id),
                     commentCount = post.commentCount,
                     timestamp = post.timestamp
                 )
