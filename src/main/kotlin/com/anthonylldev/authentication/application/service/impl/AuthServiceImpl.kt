@@ -2,8 +2,8 @@ package com.anthonylldev.authentication.application.service.impl
 
 import com.anthonylldev.authentication.application.service.AuthService
 import com.anthonylldev.authentication.domain.AuthRepository
-import com.anthonylldev.authentication.domain.CreateAccount
-import com.anthonylldev.authentication.domain.Login
+import com.anthonylldev.authentication.application.CreateAccount
+import com.anthonylldev.authentication.application.Login
 import com.anthonylldev.user.domain.User
 
 class AuthServiceImpl(

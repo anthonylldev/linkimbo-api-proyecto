@@ -1,7 +1,7 @@
 package com.anthonylldev.authentication.application.service
 
-import com.anthonylldev.authentication.domain.CreateAccount
-import com.anthonylldev.authentication.domain.Login
+import com.anthonylldev.authentication.application.CreateAccount
+import com.anthonylldev.authentication.application.Login
 import com.anthonylldev.user.domain.User
 
 interface AuthService {

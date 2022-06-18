@@ -1,14 +1,10 @@
 package com.anthonylldev.follow.infrastructure.rest
 
 import com.anthonylldev.follow.application.service.FollowService
-import com.anthonylldev.user.application.service.UserService
-import com.anthonylldev.user.domain.User
 import com.anthonylldev.util.userId
 import io.ktor.application.*
 import io.ktor.auth.*
-import io.ktor.auth.jwt.*
 import io.ktor.http.*
-import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 

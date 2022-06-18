@@ -2,14 +2,13 @@ package com.anthonylldev.authentication.infrastructure.rest
 
 import com.anthonylldev.authentication.application.Token
 import com.anthonylldev.authentication.application.service.AuthService
-import com.anthonylldev.authentication.domain.CreateAccount
-import com.anthonylldev.authentication.domain.Login
+import com.anthonylldev.authentication.application.CreateAccount
+import com.anthonylldev.authentication.application.Login
 import com.anthonylldev.user.domain.User
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import io.ktor.application.*
 import io.ktor.auth.*
-import io.ktor.client.response.*
 import io.ktor.http.*
 import io.ktor.request.*
 import io.ktor.response.*

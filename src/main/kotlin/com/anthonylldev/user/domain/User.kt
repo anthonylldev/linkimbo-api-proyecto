@@ -10,7 +10,7 @@ data class User(
     val email: String,
     val password: String,
     val realName: String? = "",
-    val profilePictureUrl: String? = null,
+    val imageBase64: String? = null,
     val description: String? = "",
     val website: String? = "",
     val followerCount: Int = 0,
