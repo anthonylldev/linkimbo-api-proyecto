@@ -1,5 +1,7 @@
 package com.anthonylldev.plugins
 
+import com.anthonylldev.activity.application.service.ActivityService
+import com.anthonylldev.activity.infrastructure.rest.activityRestController
 import com.anthonylldev.authentication.application.service.AuthService
 import com.anthonylldev.authentication.infrastructure.rest.authenticationController
 import com.anthonylldev.comment.application.service.PostCommentService
@@ -26,6 +28,7 @@ fun Application.configureRouting() {
     val postLikeService: PostLikeService by inject()
     val postCommentService: PostCommentService by inject()
     val commentLikeService: CommentLikeService by inject()
+    val activityService: ActivityService by inject()
 
     val jwtIssuer = environment.config.property("jwt.domain").getString()
     val jwtAudience = environment.config.property("jwt.audience").getString()
@@ -47,5 +50,6 @@ fun Application.configureRouting() {
             commentLikeService = commentLikeService
         )
         commentRestController(postCommentService = postCommentService)
+        activityRestController(activityService = activityService)
     }
 }
