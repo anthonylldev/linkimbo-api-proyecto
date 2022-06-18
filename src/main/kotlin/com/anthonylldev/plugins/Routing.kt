@@ -4,6 +4,8 @@ import com.anthonylldev.activity.application.service.ActivityService
 import com.anthonylldev.activity.infrastructure.rest.activityRestController
 import com.anthonylldev.authentication.application.service.AuthService
 import com.anthonylldev.authentication.infrastructure.rest.authenticationController
+import com.anthonylldev.chat.application.service.MessageService
+import com.anthonylldev.chat.infrastructure.rest.messageRestController
 import com.anthonylldev.comment.application.service.PostCommentService
 import com.anthonylldev.comment.infrastructure.rest.commentRestController
 import com.anthonylldev.follow.application.service.FollowService
@@ -29,6 +31,7 @@ fun Application.configureRouting() {
     val postCommentService: PostCommentService by inject()
     val commentLikeService: CommentLikeService by inject()
     val activityService: ActivityService by inject()
+    val messageService: MessageService by inject()
 
     val jwtIssuer = environment.config.property("jwt.domain").getString()
     val jwtAudience = environment.config.property("jwt.audience").getString()
@@ -51,5 +54,6 @@ fun Application.configureRouting() {
         )
         commentRestController(postCommentService = postCommentService)
         activityRestController(activityService = activityService)
+        messageRestController(messageService = messageService)
     }
 }

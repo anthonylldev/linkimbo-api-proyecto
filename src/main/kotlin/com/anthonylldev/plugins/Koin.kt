@@ -28,6 +28,10 @@ import com.anthonylldev.activity.application.service.ActivityService
 import com.anthonylldev.activity.application.service.impl.ActivityServiceImpl
 import com.anthonylldev.activity.domain.repository.ActivityRepository
 import com.anthonylldev.activity.infrastructure.repository.ActivityRepositoryImpl
+import com.anthonylldev.chat.application.service.MessageService
+import com.anthonylldev.chat.application.service.impl.MessageServiceImpl
+import com.anthonylldev.chat.domain.repository.MessageRepository
+import com.anthonylldev.chat.infrastructure.repository.MessageRepositoryImpl
 import com.anthonylldev.comment.application.service.PostCommentService
 import com.anthonylldev.comment.application.service.impl.PostCommentServiceImpl
 import com.anthonylldev.comment.domain.repository.PostCommentRepository
@@ -63,6 +67,7 @@ fun Application.configureKoin() {
             single<CommentLikeRepository> { CommentLikeRepositoryImpl(get()) }
             single<PostRepository> { PostRepositoryImpl(get()) }
             single<ActivityRepository> { ActivityRepositoryImpl(get()) }
+            single<MessageRepository> { MessageRepositoryImpl(get()) }
 
             single<AuthService> { AuthServiceImpl(get()) }
             single<UserService> { UserServiceImpl(get(), get(), get()) }
@@ -72,6 +77,7 @@ fun Application.configureKoin() {
             single<CommentLikeService> { CommentLikeServiceImpl(get(), get()) }
             single<PostService> { PostServiceImpl(get(), get(), get()) }
             single<ActivityService> { ActivityServiceImpl(get(), get()) }
+            single<MessageService> { MessageServiceImpl(get(), get()) }
         })
     }
 }
