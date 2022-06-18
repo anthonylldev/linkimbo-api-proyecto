@@ -38,17 +38,8 @@ fun Route.postController(
         }
 
         get("/post") {
-
             val allPostSortByDate = postService.getAllPostSortByDate(call.userId)
             call.respond(HttpStatusCode.OK, allPostSortByDate)
-
-            /*if (allPostSortByDate.isEmpty()) {
-                call.respond(HttpStatusCode.NotFound)
-                return@get
-            } else {
-                call.respond(HttpStatusCode.OK, allPostSortByDate)
-                return@get
-            }*/
         }
 
         get("/post/{postId}") {

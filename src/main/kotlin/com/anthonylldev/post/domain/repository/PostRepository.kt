@@ -1,6 +1,7 @@
 package com.anthonylldev.post.domain.repository
 
 import com.anthonylldev.post.domain.model.Post
+import com.anthonylldev.user.application.data.ProfilePostResponse
 
 interface PostRepository {
 
@@ -9,5 +10,6 @@ interface PostRepository {
     suspend fun getOneById(postId: String): Post?
     suspend fun updateLikeCount(postId: String, i: Int)
     suspend fun updateCommentCount(postId: String, i: Int)
+    suspend fun findAllByUser(userId: String): List<ProfilePostResponse>
 
 }

@@ -1,4 +1,4 @@
-package com.anthonylldev.user.application
+package com.anthonylldev.user.application.data
 
 data class ProfileResponse(
     val userId: String,

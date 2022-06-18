@@ -2,6 +2,7 @@ package com.anthonylldev.post.infrastructure.repository
 
 import com.anthonylldev.post.domain.model.Post
 import com.anthonylldev.post.domain.repository.PostRepository
+import com.anthonylldev.user.application.data.ProfilePostResponse
 import com.anthonylldev.user.domain.User
 import org.bson.types.ObjectId
 import org.litote.kmongo.coroutine.CoroutineDatabase
@@ -39,5 +40,18 @@ class PostRepositoryImpl(
             postId,
             inc(Post::likeCount, i)
         )
+    }
+
+    override suspend fun findAllByUser(userId: String): List<ProfilePostResponse> {
+        val postImages: MutableList<ProfilePostResponse> = mutableListOf()
+
+        this.post.find(Post::userId eq userId).toList().forEach { post ->
+            postImages.add(ProfilePostResponse(
+                id = post.id,
+                imageBase64 = post.imageBase64
+            ))
+        }
+
+        return postImages
     }
 }

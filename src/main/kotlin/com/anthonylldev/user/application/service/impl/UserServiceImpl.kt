@@ -1,14 +1,17 @@
 package com.anthonylldev.user.application.service.impl
 
 import com.anthonylldev.follow.domain.FollowRepository
-import com.anthonylldev.user.application.ProfileResponse
+import com.anthonylldev.post.domain.repository.PostRepository
+import com.anthonylldev.user.application.data.ProfilePostResponse
+import com.anthonylldev.user.application.data.ProfileResponse
 import com.anthonylldev.user.application.service.UserService
 import com.anthonylldev.user.domain.User
 import com.anthonylldev.user.domain.UserRepository
 
 class UserServiceImpl(
     private val userRepository: UserRepository,
-    private val followRepository: FollowRepository
+    private val followRepository: FollowRepository,
+    private val postRepository: PostRepository
 ) : UserService {
 
     override suspend fun loadProfile(userId: String, callerUserId: String): ProfileResponse? {
@@ -27,6 +30,10 @@ class UserServiceImpl(
             isOwnProfile = userId == callerUserId,
             isFollowing = followRepository.isFollowing(callerUserId, userId)
         )
+    }
+
+    override suspend fun getProfilePosts(userId: String): List<ProfilePostResponse> {
+        return postRepository.findAllByUser(userId)
     }
 
     override suspend fun updateUser(request: User, userId: String): User? {

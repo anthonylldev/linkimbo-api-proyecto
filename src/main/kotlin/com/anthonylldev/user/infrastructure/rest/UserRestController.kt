@@ -1,6 +1,7 @@
 package com.anthonylldev.user.infrastructure.rest
 
-import com.anthonylldev.user.application.ProfileResponse
+import com.anthonylldev.user.application.data.ProfilePostResponse
+import com.anthonylldev.user.application.data.ProfileResponse
 import com.anthonylldev.user.application.service.UserService
 import com.anthonylldev.user.domain.User
 import com.anthonylldev.util.userId
@@ -35,6 +36,26 @@ fun Route.userController(
                     profileResponse
                 )
             }
+        }
+
+        get("/user/profile/{userId}/posts") {
+            val userIdByRequest: String = call.parameters["userId"] ?: kotlin.run {
+                call.respond(HttpStatusCode.BadRequest)
+                return@get
+            }
+
+            if (userIdByRequest != call.userId) {
+                call.respond(HttpStatusCode.Unauthorized)
+                return@get
+            }
+
+            val profileResponse: List<ProfilePostResponse> = userService.getProfilePosts(userIdByRequest)
+
+            call.respond(
+                HttpStatusCode.OK,
+                profileResponse
+            )
+
         }
 
         get("/user/{userId}") {

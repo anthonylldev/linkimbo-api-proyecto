@@ -1,6 +1,7 @@
 package com.anthonylldev.user.application.service
 
-import com.anthonylldev.user.application.ProfileResponse
+import com.anthonylldev.user.application.data.ProfilePostResponse
+import com.anthonylldev.user.application.data.ProfileResponse
 import com.anthonylldev.user.domain.User
 
 interface UserService {
@@ -9,4 +10,5 @@ interface UserService {
     suspend fun updateUser(request: User, userId: String): User?
     suspend fun getUser(userId: String): User?
 
+    suspend fun getProfilePosts(userId: String): List<ProfilePostResponse>
 }

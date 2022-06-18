@@ -60,7 +60,7 @@ fun Application.configureKoin() {
             single<PostRepository> { PostRepositoryImpl(get()) }
 
             single<AuthService> { AuthServiceImpl(get()) }
-            single<UserService> { UserServiceImpl(get(), get()) }
+            single<UserService> { UserServiceImpl(get(), get(), get()) }
             single<FollowService> { FollowServiceImpl(get(), get()) }
             single<PostLikeService> { PostLikeServiceImpl(get(), get()) }
             single<PostCommentService> { PostCommentServiceImpl(get(), get(), get(), get()) }
