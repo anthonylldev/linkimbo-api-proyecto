@@ -44,11 +44,6 @@ fun Route.userController(
                 return@get
             }
 
-            if (userIdByRequest != call.userId) {
-                call.respond(HttpStatusCode.Unauthorized)
-                return@get
-            }
-
             val profileResponse: List<ProfilePostResponse> = userService.getProfilePosts(userIdByRequest)
 
             call.respond(

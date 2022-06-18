@@ -27,11 +27,6 @@ fun Route.messageRestController(
                 return@post
             }
 
-            if (request.userEmitterId != call.callId) {
-                call.respond(HttpStatusCode.Unauthorized)
-                return@post
-            }
-
             if (request.userReceiverId != userIdByRequest) {
                 call.respond(HttpStatusCode.BadRequest)
                 return@post
@@ -47,7 +42,7 @@ fun Route.messageRestController(
             if (didUserExist == null) {
                 call.respond(HttpStatusCode.NotFound)
             } else {
-                call.respond(HttpStatusCode.OK)
+                call.respond(HttpStatusCode.OK, didUserExist)
             }
         }
     }

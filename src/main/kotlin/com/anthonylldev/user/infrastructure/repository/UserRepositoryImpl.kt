@@ -39,24 +39,24 @@ class UserRepositoryImpl(
 
     override suspend fun incrementFollow(userId: String, followedUserId: String) {
         user.updateOneById(
-            ObjectId(userId),
+            userId,
             inc(User::followingCount, 1)
         )
 
         user.updateOneById(
-            ObjectId(followedUserId),
+            followedUserId,
             inc(User::followerCount, 1)
         )
     }
 
     override suspend fun reduceFollow(userId: String, followedUserId: String) {
         user.updateOneById(
-            ObjectId(userId),
+            userId,
             inc(User::followingCount, -1)
         )
 
         user.updateOneById(
-            ObjectId(followedUserId),
+            followedUserId,
             inc(User::followerCount, -1)
         )
     }
